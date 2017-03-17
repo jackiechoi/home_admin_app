@@ -76,6 +76,6 @@ app.get("/history/:id", function(req, res){
 
 
 app.listen(3001, function(){
-	console.log("home app v2 working!")
+	console.log("payment app working!")
 })
 
