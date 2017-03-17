@@ -1,0 +1,26 @@
+<%include partials/header%>
+
+<div class="ui three item menu">
+  <a href="/index" class="item">Home</a>
+  <a href="/history" class="item">Payment History</a>
+  <a href="/contract" class="item">Contract</a>
+</div>
+
+<form action="/history" method="POST">
+	<div class="ui right labeled input">
+	  <div class="ui label">€</div>
+	  <input type="text" name="item[value]" placeholder="Amount">
+	  <div class="ui basic label">.00</div>
+	</div>
+	<div class="ui form left icon input">
+	  <i class="tags icon"></i>
+	  <input type="text" name="item[description]" placeholder="Description">
+	</div>
+
+	<div class="ui horizontal divider">
+    Create a New Transaction
+  </div>
+	<input type="submit" class="ui green button">
+
+</form>
+<%include partials/footer%>

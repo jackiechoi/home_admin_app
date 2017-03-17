@@ -1,0 +1,52 @@
+<%include partials/header%>
+
+<div class="ui three item menu">
+  <a href="/index" class="item">Home</a>
+  <a href="/history" class="item">Payment History</a>
+  <a href="/contract" class="item">Contract</a>
+</div>
+
+<div class="ui main text container segment">
+	<div class="ui big header">
+		
+		<p></p>
+	  <p></p>
+	  <p></p>
+
+	</div>
+</div>
+
+
+<table class="ui striped table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Transaction Date</th>
+      <th>Contract Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=item.id%></td>
+      <td><%=item.description%></td>
+      <td><%=item.value%></td>
+      <td><%=item.updatedAt%></td>
+      <td><%=item.contractId%></td>
+    </tr>
+</tbody>
+<tfoot class="full-width">
+    <tr>
+      <th colspan="5">
+      	<div class="ui left floated small blue button">
+          Edit
+        </div>
+        <div class="negative ui right floated small button">
+          Delete
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>
+<%include partials/footer%>

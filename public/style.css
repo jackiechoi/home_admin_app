@@ -1,0 +1,22 @@
+i.icon {
+	font-size: 1em;
+}
+.ui.text.container {
+	margin-top: 3em;
+}
+
+.container.segment {
+	margin-top: 3em;
+}
+
+.ui.items>.item>.image+.content {
+	margin-top: 3em;
+}
+.ui.primary.button{
+	background-color: #6435c9;
+}
+
+label {
+	color: #6435c9;
+}
+
