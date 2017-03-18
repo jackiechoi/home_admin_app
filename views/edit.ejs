@@ -1,7 +1,7 @@
 <%include partials/header%>
 
 <div class="ui main text container segment">
-  <div class="ui big header">Edit Transaction for Id: <%=item.id%></div> 
+  <div class="ui big header"><i class="edit icon"></i>Edit Transaction for Id: <%=item.id%></div> 
 	<form action="/overview/<%=item._id%>?_method=PUT" method="POST">
 		<div class="ui right labeled input">
 		  <div class="ui label">€</div>

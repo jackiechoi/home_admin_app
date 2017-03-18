@@ -16,14 +16,15 @@ app.use(cookieParser())
 app.use("/public", express.static('public'))
 app.use(methodOverride("_method"))
 
-//PAGE ROUTING
+// PAGE ROUTING
 app.get("/", function(req, res){
 	res.redirect("index");
 });
+// Landing Page
 app.get("/index", function(req, res){
 	res.render("index")
 })
-//Payment Overview
+// Payment Overview
 app.get("/overview", function(req, res){
 		Item.find({}, function(err, items){
 		if(err){
@@ -33,20 +34,24 @@ app.get("/overview", function(req, res){
 		}
 	})
 })
+// Contract
 app.get("/contract", function(req, res){
 	res.render("contract")
 })
 // Form to add a new item
-app.get("/new", function(req, res){
+app.get("/overview/new", function(req, res){
 	res.render("new");
 })
-
+// Error page
+app.get("/err", function(req, res){
+	res.render("err");
+})
 // CREATE ROUTE
 app.post("/overview", function(req, res){
-	//create item
+	console.log("data: "+req.body.item)
 	Item.create(req.body.item, function(err, newItem){
 		if(err){
-			res.render("new")
+			res.redirect("/err");
 		}else{
 			res.redirect("/overview");
 		}
@@ -57,7 +62,7 @@ app.post("/overview", function(req, res){
 app.get("/overview/:id", function(req, res){
 	Item.findById(req.params.id, function(err, foundItem){
 		if(err){
-			res.redirect("/overview");
+			res.redirect("/err");
 		}else{
 			res.render("show", {item: foundItem});
 		}
@@ -68,18 +73,18 @@ app.get("/overview/:id", function(req, res){
 app.get("/overview/:id/edit", function(req, res){
 	Item.findById(req.params.id, function(err, foundItem){
 		if(err){
-			res.redirect("/overview");
+			res.redirect("/err");
 		}else{
 			res.render("edit", {item: foundItem});
 		}
 	})
 })
 
-//UPDATE ROUTE
+// UPDATE ROUTE
 app.put("/overview/:id", function(req, res){
 	Item.findByIdAndUpdate(req.params.id, req.body.item, function(err, updatedItem){
 		if(err){
-			res.redirect("/overview");
+			res.redirect("/err");
 		}else{
 			res.redirect("/overview/"+req.params.id);
 		}
@@ -90,7 +95,7 @@ app.put("/overview/:id", function(req, res){
 app.delete("/overview/:id", function(req, res){
 	Item.findByIdAndRemove(req.params.id, function(err){
 		if(err){
-			res.redirect("/overview");
+			res.redirect("/err");
 		}else{
 			res.redirect("/overview");
 		}

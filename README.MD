@@ -5,7 +5,7 @@ RESTful ROUTES
 
 INDEX = {path: /index, Http verb: GET, Purpose: landing page}
 
-NEW = {path: /new, Http verb: GET, Purpose: Show new item form}
+NEW = {path: /overview/new, Http verb: GET, Purpose: Show new item form}
 
 CREATE = {path: /overview, Http verb: POST, Purpose: create a new item, then redirect to overview}
 

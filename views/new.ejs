@@ -6,15 +6,16 @@
 	<form action="/overview" method="POST">
 		<div class="ui right labeled input">
 		  <div class="ui label">€</div>
-		  <input type="text" name="item[value]" placeholder="Amount">
+		  <input type="text" name="item[value]" placeholder="Amount" required>
 		  <div class="ui basic label">.00</div>
 		</div>
 		<div class="ui form left icon input" id="description">
 		  <i class="tags icon"></i>
-		  <input type="text" name="item[description]" placeholder="Description">
+		  <input type="text" name="item[description]" placeholder="Description" required>
 		</div>
 		<input type="submit" class="ui green button" id="add">
 	</form>
 </div>
+
 
 <%include partials/footer%>
