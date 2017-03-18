@@ -63,15 +63,28 @@ app.get("/login", function(req, res){
 	res.render("login")
 })
 // login logic
-// middleware code runs before 
 app.post("/login", passport.authenticate("local", {
 	successRedirect: "/overview",
 	failureRedirect: "/err"
 }), function(req, res){
 });
 
-// Payment Overview
-app.get("/overview", function(req, res){
+// Logout
+app.get("/logout", function(req, res){
+	//passport is simply destroying the user data in the session
+	req.logout();
+	res.redirect("/index");
+})
+
+//isLoggedIn: middleware function we defined
+function isLoggedIn (req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} res.redirect('/login');
+}
+
+// Overview (when a get request to /overview comes in, it will run isLoggedin function. If so, run next which is Item.find)
+app.get("/overview", isLoggedIn, function(req, res){
 		Item.find({}, function(err, items){
 		if(err){
 			res.redirect("/err");
@@ -81,7 +94,7 @@ app.get("/overview", function(req, res){
 	})
 })
 // Contract
-app.get("/contract", function(req, res){
+app.get("/contract", isLoggedIn, function(req, res){
 	res.render("contract")
 })
 // Form to add a new item
