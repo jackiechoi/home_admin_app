@@ -15,26 +15,14 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use("/public", express.static('public'))
 app.use(methodOverride("_method"))
-/*
-Item.create({
-	id: 3,
-	contractId: 3,
-	description: "Rent",
-	value: 2000
-})
-*/
 
-//Page routing
+//PAGE ROUTING
 app.get("/", function(req, res){
 	res.redirect("index");
 });
 app.get("/index", function(req, res){
 	res.render("index")
 })
-app.get("/contract", function(req, res){
-	res.render("contract")
-})
-
 //Payment Overview
 app.get("/overview", function(req, res){
 		Item.find({}, function(err, items){
@@ -45,8 +33,10 @@ app.get("/overview", function(req, res){
 		}
 	})
 })
-
-// New transaction
+app.get("/contract", function(req, res){
+	res.render("contract")
+})
+// Form to add a new item
 app.get("/new", function(req, res){
 	res.render("new");
 })
