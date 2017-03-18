@@ -6,8 +6,17 @@
 	<link rel="stylesheet" type="text/css" href="/public/style.css">
 </head>
 <body>
-	<div class="ui three item menu" id="nav">
+	<div class="ui huge black inverted menu" id="nav">
 	  <a href="/index" class="item"><i class="home icon"></i>Home</a>
 	  <a href="/overview" class="item"><i class="line chart icon"></i>Payment Overview</a>
 	  <a href="/contract" class="item"><i class="world icon"></i>Contract</a>
+	  <div class="right menu">
+	  <% if(!currentUser){%>
+    <a href="/index" class="item">Sign Up</a>
+    <a href="/login" class="item">Login</a>
+    <% }else{%>
+   	<a href="#" class="item">Signed In As <%=currentUser.username%></a>
+    <a href="/logout" class="item">Logout</a>
+    <%}%>
+  	</div>
 	</div>

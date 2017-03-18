@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use("/public", express.static('public'))
 app.use(methodOverride("_method"))
-//use what we're requiring and executing with three options in one clean swoop
+// Passport configuration
 app.use(require('express-session')({
 	secret: "this is secret!", //used to encode and decode sessions.
 	resave: false,
@@ -27,42 +27,47 @@ app.use(require('express-session')({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-//reading the session and getting data from the session
-//passportLocalMongoose already defined serializeUser functions for us!
+//setting up middleware called authenticate
 passport.use(new LocalStratey(User.authenticate())); 
-//creating a new local strategy using User.authenticate which is coming from passportLocalMongoose of user.js (so need to write authenticate method ourselves!)
+//built-in authentication methods
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+//creating my own middleware: we're passing currentUser: req.user to every single handler by calling this function for every route
+app.use(function(req, res, next){
+	res.locals.currentUser = req.user;
+	next();
+})
 
 //==========================ROUTES==========================
 app.get("/", function(req, res){
 	res.redirect("index");
 });
-// Landing
+// Landing/Sign-up
 app.get("/index", function(req, res){
-	res.render("index")
+	res.render("index");
 })
 
-// handling user sign-up
+// Sign-up logic
 app.post("/index", function(req, res){
-	req.body.username;
-	req.body.password;
-	User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+	var newUser = new User({username: req.body.username})
+	User.register(newUser, req.body.password, function(err, user){
 		if(err){
-			res.redirect("/err");
+			console.log(err);
+			return res.redirect("/err");
 		}
 		passport.authenticate('local')(req, res, function(){
 			res.redirect("/overview");
 		});
 	});
 })
-// Auth Routes
 
 // LOGIN ROUTES
 app.get("/login", function(req, res){
 	res.render("login")
 })
-// login logic
+// Login logic: app.post("/login", middleware, callback)
+//when a request comes in to login with post method, the passport middle runs first
 app.post("/login", passport.authenticate("local", {
 	successRedirect: "/overview",
 	failureRedirect: "/err"
@@ -83,10 +88,11 @@ function isLoggedIn (req, res, next){
 	} res.redirect('/login');
 }
 
-// Overview (when a get request to /overview comes in, it will run isLoggedin function. If so, run next which is Item.find)
+// Overview (when a get request to /overview comes in, it will run isLoggedin function. If succeeded, run next which is Item.find)
 app.get("/overview", isLoggedIn, function(req, res){
 		Item.find({}, function(err, items){
 		if(err){
+			console.log(err);
 			res.redirect("/err");
 		}else{
 			res.render("overview", {items:items})
@@ -98,18 +104,19 @@ app.get("/contract", isLoggedIn, function(req, res){
 	res.render("contract")
 })
 // Form to add a new item
-app.get("/overview/new", function(req, res){
+app.get("/overview/new", isLoggedIn, function(req, res){
 	res.render("new");
 })
-// Error page
+// ERROR ROUTE
 app.get("/err", function(req, res){
 	res.render("err");
 })
-// CREATE ROUTE
-app.post("/overview", function(req, res){
+// CREATE ITEM ROUTE
+app.post("/overview", isLoggedIn, function(req, res){
 	console.log("data: "+req.body.item)
 	Item.create(req.body.item, function(err, newItem){
 		if(err){
+			console.log(err);
 			res.redirect("/err");
 		}else{
 			res.redirect("/overview");
@@ -117,10 +124,11 @@ app.post("/overview", function(req, res){
 	});
 });
 
-// SHOW ROUTE
-app.get("/overview/:id", function(req, res){
+// SHOW ITEM ROUTE
+app.get("/overview/:id", isLoggedIn, function(req, res){
 	Item.findById(req.params.id, function(err, foundItem){
 		if(err){
+			console.log(err);
 			res.redirect("/err");
 		}else{
 			res.render("show", {item: foundItem});
@@ -132,6 +140,7 @@ app.get("/overview/:id", function(req, res){
 app.get("/overview/:id/edit", function(req, res){
 	Item.findById(req.params.id, function(err, foundItem){
 		if(err){
+			console.log(err);
 			res.redirect("/err");
 		}else{
 			res.render("edit", {item: foundItem});
@@ -143,6 +152,7 @@ app.get("/overview/:id/edit", function(req, res){
 app.put("/overview/:id", function(req, res){
 	Item.findByIdAndUpdate(req.params.id, req.body.item, function(err, updatedItem){
 		if(err){
+			console.log(err);
 			res.redirect("/err");
 		}else{
 			res.redirect("/overview/"+req.params.id);
@@ -154,14 +164,13 @@ app.put("/overview/:id", function(req, res){
 app.delete("/overview/:id", function(req, res){
 	Item.findByIdAndRemove(req.params.id, function(err){
 		if(err){
+			console.log(err);
 			res.redirect("/err");
 		}else{
 			res.redirect("/overview");
 		}
 	})
 })
-
-
 
 
 app.listen(3001, function(){

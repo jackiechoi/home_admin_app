@@ -1,7 +1,15 @@
-<h1>Login!</h1>
+<%include partials/header%>
 
-<form action="/login" method="POST">
-	<input type="text" name="username" placeholder="username">
-	<input type="text" name="password" placeholder="password">
-	<button>Login</button>
+<form action="/login" method="POST" class="ui huge form">
+  <div class="six wide field">
+    <label>Username</label>
+    <input type="text" name="username" placeholder="username">
+  </div>
+  <div class="six wide field">
+    <label>Password</label>
+    <input type="text" name="password" placeholder="password">
+  </div>
+  <button class="ui blue button" type="submit">Login</button>
 </form>
+
+<%include partials/footer%>

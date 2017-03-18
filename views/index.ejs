@@ -1,20 +1,20 @@
 <%include partials/header%>
 
-<div class="ui attached message">
+<div class="ui attached huge message">
   <div class="header">
     Welcome to HOME!
   </div>
   <p>Fill out the form below to sign-up for a new account</p>
 </div>
-<form action="/index" method="POST" class="ui form attached fluid segment">
+<form action="/index" method="POST" class="ui huge form attached fluid segment">
   <div class="two fields">
     <div class="field">
       <label>First Name</label>
-      <input placeholder="First Name" type="text">
+      <input name="firstname" placeholder="First Name" type="text">
     </div>
     <div class="field">
       <label>Last Name</label>
-      <input placeholder="Last Name" type="text">
+      <input name="lastname" placeholder="Last Name" type="text">
     </div>
   </div>
   <div class="field">
@@ -37,6 +37,6 @@
   <i class="icon help"></i>
   Already signed up? <a href="/login">Login here</a> instead.
 </div>
-<a href="/logout">Logout</a>
+
 
 <%include partials/footer%>
