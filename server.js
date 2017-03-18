@@ -1,10 +1,14 @@
 var express = require('express'),
-	mongoose = require('mongoose'),
-	methodOverride = require('method-override')
-	cookieParser = require('cookie-parser'),
-	bodyParser = require('body-parser'),
-	app = express(),
-	Item = require("./models/item");
+		app = express(),
+		mongoose = require('mongoose'),
+		methodOverride = require('method-override')
+		cookieParser = require('cookie-parser'),
+		bodyParser = require('body-parser'),
+		passport = require('passport'),
+		LocalStratey = require('passport-local'),
+		passportLocalMongoose = require('passport-local-mongoose'),
+		Item = require("./models/item"),
+		User = require('./models/user');
 
 //APP CONFIG
 mongoose.connect("mongodb://localhost/home_v2");
@@ -15,6 +19,19 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use("/public", express.static('public'))
 app.use(methodOverride("_method"))
+//use what we're requiring and executing with three options in one clean swoop
+app.use(require('express-session')({
+	secret: "this is secret!", //used to encode and decode sessions.
+	resave: false,
+	saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
+//reading the session and getting data from the session
+//passportLocalMongoose already defined serializeUser functions for us!
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // PAGE ROUTING
 app.get("/", function(req, res){
