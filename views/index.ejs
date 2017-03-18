@@ -6,32 +6,32 @@
   </div>
   <p>Fill out the form below to sign-up for a new account</p>
 </div>
-<form class="ui form attached fluid segment">
+<form action="/index" method="POST" class="ui form attached fluid segment">
   <div class="two fields">
     <div class="field">
       <label>First Name</label>
-      <input placeholder="First Name" type="text" required>
+      <input placeholder="First Name" type="text">
     </div>
     <div class="field">
       <label>Last Name</label>
-      <input placeholder="Last Name" type="text" required>
+      <input placeholder="Last Name" type="text">
     </div>
   </div>
   <div class="field">
     <label>Username</label>
-    <input placeholder="Username" type="text" required>
+    <input placeholder="Username" name="username" type="text" required>
   </div>
   <div class="field">
     <label>Password</label>
-    <input type="password" required>
+    <input type="password" name="password" required>
   </div>
   <div class="inline field">
     <div class="ui checkbox">
-      <input type="checkbox" id="terms" required>
+      <input type="checkbox" id="terms">
       <label for="terms">I agree to the terms and conditions</label>
     </div>
   </div>
-  <div class="ui blue submit button">Submit</div>
+  <input type="submit" class="ui blue button">
 </form>
 <div class="ui bottom attached warning message">
   <i class="icon help"></i>

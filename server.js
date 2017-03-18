@@ -10,7 +10,7 @@ var express = require('express'),
 		Item = require("./models/item"),
 		User = require('./models/user');
 
-//APP CONFIG
+//==========================APP CONFIG==========================
 mongoose.connect("mongodb://localhost/home_v2");
 app.set('view engine', 'ejs')
 app.set('view cache', false);
@@ -33,19 +33,57 @@ app.use(passport.session())
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// PAGE ROUTING
+//==========================ROUTES==========================
 app.get("/", function(req, res){
 	res.redirect("index");
 });
-// Landing Page
+// Landing
 app.get("/index", function(req, res){
 	res.render("index")
 })
+
+// handling user sign-up
+app.post("/index", function(req, res){
+	req.body.username;
+	req.body.password;
+	User.register(new User({username: req.body.username}), req.body.password, function(err, newUser){
+		if(err){
+			res.redirect("/err");
+		}
+		passport.authenticate('local')(req, res, function(){
+			res.redirect("/overview");
+		});
+	});
+})
+// Auth Routes
+
+// Sign-up Page
+app.get("/register", function(req, res){
+	res.render("register")
+})
+
+// handling user sign-up
+app.post("/register", function(req, res){
+	req.body.username
+	req.body.password
+	//pass pw as a second arg to User.register which will then hash it and stores that in DB. All goes well, new user with all the info is created
+	User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+		if(err){
+			res.redirect("/err");
+		} 
+		//using passport's local strategy, we're loggin the new user
+		passport.authenticate('local')(req, res, function(){
+			res.redirect("/overview");
+		})
+	});
+});
+
+
 // Payment Overview
 app.get("/overview", function(req, res){
 		Item.find({}, function(err, items){
 		if(err){
-			console.log("error!");
+			res.redirect("/err");
 		}else{
 			res.render("overview", {items:items})
 		}
