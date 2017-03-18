@@ -1,5 +1,5 @@
 <%include partials/header%>
-
+<div class="ui main text container segment">
 <% if(!currentUser){%>
   <div class="ui attached huge message">
   <div class="header">
@@ -39,7 +39,26 @@
   Already signed up? <a href="/login">Login here</a> instead.
   </div>
 <%}else{%>
-  <h1>Welcome back, <%=currentUser.username%>!</h1>
-<%}%>
+  <div class="ui huge header">Welcome back, <%=currentUser.firstname%>!</div>
+  <div class="ui centered card">
+  <div class="image">
+    <img src="../public/img/elyse.png">
+  </div>
+  <div class="content">
+      <a class="header"><%=currentUser.username%></a>
+      <div class="meta">
+        <span class="date">Member since <%=currentUser.date%></span>
+      </div>
+    </div>
+    <div class="extra content">
+      <a>
+        <i class="users icon"></i>
+        2 Tenants
+      </a>
+    </div>
+  </div>
+</div>
 
+<%}%>
+</div>
 <%include partials/footer%>

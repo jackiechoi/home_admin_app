@@ -10,7 +10,12 @@ router.get("/index", function(req, res){
 })
 // SIGN-UP LOGIC
 router.post("/index", function(req, res){
-	var newUser = new User({username: req.body.username})
+	var newUser = new User({
+		firstname: req.body.firstname,
+		lastname: req.body.lastname,
+		username: req.body.username,
+		date: req.body.date
+	})
 	User.register(newUser, req.body.password, function(err, user){
 		if(err){
 			console.log(err);
@@ -21,7 +26,10 @@ router.post("/index", function(req, res){
 		});
 	});
 })
-
+// ERROR ROUTE
+router.get("/err", function(req, res){
+	res.render("err");
+})
 // LOGIN ROUTE
 router.get("/login", function(req, res){
 	res.render("login")

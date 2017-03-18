@@ -1,21 +1,23 @@
 <%include partials/header%>
 
-<div class="ui big header">
-	<i class="euro icon"></i>Current Balance
+<div class="ui main text container segment">
+	<div class="ui big header">
+		Hello <%=currentUser.firstname%>, your current balance is: € 10.00.
+	</div>
+	<a href="/overview/new" class="ui big header"><i class="plus icon"></i>Make a Transaction</a>
+	<table class="ui tablet stackable table">
+	  
+	  	<% items.forEach(function(item){ %>
+		  <tbody>
+		    <tr>
+		      <td>ID: <%=item.id%></td>
+		      <td><%=item.description%></td>
+		      <td class="right aligned">€<%=item.value%></td>
+		      <td><a href="/overview/<%=item._id%>">Detail</a></td>
+		    </tr>
+		  </tbody>
+		<%})%>
+	</table>
 </div>
-<a href="/overview/new" class="ui big header"><i class="plus icon"></i>Create a New Transaction</a>
-<table class="ui tablet stackable table">
-  
-  	<% items.forEach(function(item){ %>
-	  <tbody>
-	    <tr>
-	      <td>ID: <%=item.id%></td>
-	      <td><%=item.description%></td>
-	      <td class="right aligned">€<%=item.value%></td>
-	      <td><a href="/overview/<%=item._id%>">Detail</a></td>
-	    </tr>
-	  </tbody>
-	<%})%>
-</table>
 
 <%include partials/footer%>

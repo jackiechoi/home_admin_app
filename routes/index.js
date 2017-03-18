@@ -26,10 +26,6 @@ router.get("/contract", isLoggedIn, function(req, res){
 router.get("/overview/new", isLoggedIn, function(req, res){
 	res.render("new");
 })
-// ERROR ROUTE
-router.get("/err", function(req, res){
-	res.render("err");
-})
 // CREATE ITEM ROUTE
 router.post("/overview", isLoggedIn, function(req, res){
 	console.log("data: "+req.body.item)
@@ -42,7 +38,10 @@ router.post("/overview", isLoggedIn, function(req, res){
 		}
 	});
 });
-
+// ERROR ROUTE
+router.get("/err", function(req, res){
+	res.render("err");
+})
 // SHOW ITEM ROUTE
 router.get("/overview/:id", isLoggedIn, function(req, res){
 	Item.findById(req.params.id, function(err, foundItem){

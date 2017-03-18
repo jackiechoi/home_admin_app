@@ -2,7 +2,7 @@
 
 
 <div class="ui main text container segment">
-  <div class="ui huge header">Create a New Transaction</div> 
+  <div class="ui huge header">Make a Transaction</div> 
 	<form action="/overview" method="POST">
 		<div class="ui right labeled input">
 		  <div class="ui label">€</div>
@@ -13,6 +13,17 @@
 		  <i class="tags icon"></i>
 		  <input type="text" name="item[description]" placeholder="Description" required>
 		</div>
+
+	<div class="ui huge form">
+	  <div class="field">
+	    <select>
+	      <option value="">Select</option>
+	      <option value="0">Debit</option>
+	      <option value="1">Credit</option>
+	    </select>
+	  </div>
+	</div>
+
 		<input type="submit" class="ui green button" id="add">
 	</form>
 </div>
