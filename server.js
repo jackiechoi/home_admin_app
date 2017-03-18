@@ -27,9 +27,10 @@ app.use(require('express-session')({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
 //reading the session and getting data from the session
 //passportLocalMongoose already defined serializeUser functions for us!
+passport.use(new LocalStratey(User.authenticate())); 
+//creating a new local strategy using User.authenticate which is coming from passportLocalMongoose of user.js (so need to write authenticate method ourselves!)
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -46,7 +47,7 @@ app.get("/index", function(req, res){
 app.post("/index", function(req, res){
 	req.body.username;
 	req.body.password;
-	User.register(new User({username: req.body.username}), req.body.password, function(err, newUser){
+	User.register(new User({username: req.body.username}), req.body.password, function(err, user){
 		if(err){
 			res.redirect("/err");
 		}
@@ -57,27 +58,17 @@ app.post("/index", function(req, res){
 })
 // Auth Routes
 
-// Sign-up Page
-app.get("/register", function(req, res){
-	res.render("register")
+// LOGIN ROUTES
+app.get("/login", function(req, res){
+	res.render("login")
 })
-
-// handling user sign-up
-app.post("/register", function(req, res){
-	req.body.username
-	req.body.password
-	//pass pw as a second arg to User.register which will then hash it and stores that in DB. All goes well, new user with all the info is created
-	User.register(new User({username: req.body.username}), req.body.password, function(err, user){
-		if(err){
-			res.redirect("/err");
-		} 
-		//using passport's local strategy, we're loggin the new user
-		passport.authenticate('local')(req, res, function(){
-			res.redirect("/overview");
-		})
-	});
+// login logic
+// middleware code runs before 
+app.post("/login", passport.authenticate("local", {
+	successRedirect: "/overview",
+	failureRedirect: "/err"
+}), function(req, res){
 });
-
 
 // Payment Overview
 app.get("/overview", function(req, res){
