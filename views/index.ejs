@@ -1,12 +1,13 @@
 <%include partials/header%>
 
-<div class="ui attached huge message">
+<% if(!currentUser){%>
+  <div class="ui attached huge message">
   <div class="header">
     Welcome to HOME!
   </div>
   <p>Fill out the form below to sign-up for a new account</p>
 </div>
-<form action="/index" method="POST" class="ui huge form attached fluid segment">
+<form action="/index" method="POST" class="ui big form attached fluid segment" id="signup">
   <div class="two fields">
     <div class="field">
       <label>First Name</label>
@@ -32,11 +33,13 @@
     </div>
   </div>
   <input type="submit" class="ui blue button">
-</form>
-<div class="ui bottom attached warning message">
+  </form>
+  <div class="ui bottom attached warning message">
   <i class="icon help"></i>
   Already signed up? <a href="/login">Login here</a> instead.
-</div>
-
+  </div>
+<%}else{%>
+  <h1>Welcome back, <%=currentUser.username%>!</h1>
+<%}%>
 
 <%include partials/footer%>
