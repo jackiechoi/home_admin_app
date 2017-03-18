@@ -20,3 +20,18 @@ label {
 	color: #6435c9;
 }
 
+#description, #add {
+	font-size: 1em;
+}
+footer {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+}
+body {
+	background-color: rgba(128, 128, 128, 0.24);
+}
+
+

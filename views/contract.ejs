@@ -1,12 +1,135 @@
 <%include partials/header%>
 
-<div class="ui three item menu">
-  <a href="/index" class="item">Home</a>
-  <a href="/history" class="item">Payment History</a>
-  <a href="/contract" class="active item">Contract</a>
-</div>
 
-Contract Page
+<form class="ui form">
+  <h4 class="ui dividing header">Tenant Information</h4>
+  <div class="field">
+    <label>Name</label>
+    <div class="two fields">
+      <div class="field">
+        <input type="text" value="John">
+      </div>
+      <div class="field">
+        <input type="text" value="Doe">
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label>Billing Address</label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <input type="text" value="Rue de la loi 42">
+      </div>
+      <div class="four wide field">
+        <input type="text" value="Unit 6">
+      </div>
+    </div>
+  </div>
+    <div class="field">
+      <label>Country</label>
+      <div class="ui fluid search selection dropdown">
+        <input type="hidden" name="country">
+        <i class="dropdown icon"></i>
+	    		<div class="item" data-value="be"><i class="be flag"></i>Belgium</div>
+    </div>
+  </div>
+  <h4 class="ui dividing header">Billing Information</h4>
+  <div class="field">
+    <label>Card Type</label>
+    <div class="ui selection dropdown">
+      <input type="hidden" name="card[type]">
+        <div class="item" data-value="visa">
+          <i class="visa icon"></i>
+          Visa
+        </div>
+       
+    </div>
+  </div>
+  <div class="fields">
+    <div class="seven wide field">
+      <label>Card Number</label>
+      <input type="text" value="**** **** **** ****">
+    </div>
+    <div class="three wide field">
+      <label>CVC</label>
+      <input type="text" value="***">
+    </div>
+    <div class="six wide field">
+      <label>Expiration</label>
+      <div class="two fields">
+        <div class="field">
+          <input type="text" value="December">
+        </div>
+        <div class="field">
+          <input type="text" value="2022">
+        </div>
+      </div>
+    </div>
+  </div>
+   <h4 class="ui dividing header">Terms</h4>
+  <textarea rows="20">SUBLEASE AGREEMENT
+This is an agreement to sublet real property according to the terms specified below.
+The sublessor agrees to sublet and the subtenant agrees to take the premises described below. Both
+parties agree to keep, perform and fulfill the promises, conditions and agreements below:
+1. The sublessor is: ______________________________________________
+2. The subtenant is: ______________________________________________
+3. The location of the premises is: ___________________________________
+City of Fort Collins, County of Larimer, Colorado.
+Unit No. ________
+4. The term of this sublease is ______________, beginning __________, 20___.
+The rent is $_____________per month, payable in advance on the ______ day of each month. The
+rent is payable to _________________________________ at (address)
+_____________________________________________________.
+5. The sublease agreement will terminate on (date) _____________________. There shall be no
+holding over under the terms of this sublease agreement under any circumstances.
+6. All charges for utilities connected with premises which are to be paid by the sublessor under the
+master lease shall be paid by the subtenant for the term of this sublease.
+7. Subtenant agrees to surrender and deliver to the sublessor the premises and all furniture and
+decorations within the premises in as good a condition as they were at the beginning of the term,
+reasonable wear and tear excepted. The subtenant will be liable to the sublessor for any damages
+occurring to the premises or the contents thereof or to the building which are done by the subtenant
+or his guests.
+8. Subtenant agrees to pay to sublessor a deposit of $________ to cover damages and cleaning.
+Sublessor agrees that if the premises and contents thereof are returned to him/her in the same
+condition as when received by the subtenant, reasonable wear and tear thereof excepted, (s)he will
+refund to the subtenant $________ at the end of the term, or within 30 days thereafter. Any reason
+for retaining a portion of the deposit shall be explained in writing within 30 days to the subtenant.
+9. At the time of taking possession of the premises by the subtenant, the sublessor will provide the
+subtenant with an inventory form within three (3) days of taking possession.
+10. This sublease agreement incorporates and is subject to the original lease agreement between the
+sublessor and his lessor, a copy of which is attached hereto, and which is hereby referred to and
+incorporated as if it were set out here at length. The subtenant agrees to assume all of the obligations
+and responsibilities of the sublessor under the original lease for the duration of the sublease
+agreement.
+2
+11. In the event of any legal action concerning this sublease, the losing party shall pay to the prevailing
+party reasonable attorney’s fees and court costs to be fixed by the court wherein such judgment shall
+be entered.
+12. Other ___________________________________________________________________________
+_________________________________________________________________________________
+_________________________________________________________________________________
+_________________________________________________________________________________
+13. This lease constitutes the sole agreement between the parties, and no additions, deletions or
+modifications may be accomplished without the written consent of both parties (ANY ORAL
+REPRESENTATIONS MADE AT THE TIME OF EXECUTING THIS LEASE ARE NOT
+LEGALLY VALID AND, THEREFORE, ARE NOT BINDING UPON EITHER PARTY).
+14. The words “sublessor” and “subtenant” as used herein include the plural as well as the singular; no
+regard for gender is intended by the language in this sublease.
+15. If the subtenant is under 18 years of age, then his/her legal guardian or parent guarantees and agrees
+to perform all of the terms, covenants and conditions of this sublease by affixing his signature below.
+16. Each signatory to this sublease acknowledges receipt of an executed copy thereof.
+17. This sublease is not binding upon either party unless approved by the landlord as provided below.
+18. The parties hereby bind themselves to this agreement by their signatures affixed below on this
+______day of ____________, 20___.
+SUBLESSOR SUBTENANT
+___________________________ ____________________________
+___________________________ ____________________________
+___________________________ ____________________________
+____________________________
+(Parent/guardian if subtenant is under
+18 years of age).
+I hereby give my consent to subletting of the above-described premises as set out</textarea>
+</form>
 
 
-<%include partials/footer%>
+

@@ -1,0 +1,22 @@
+<%include partials/header%>
+
+<div class="ui big header">
+	<i class="euro icon"></i>Current Balance
+</div>
+
+<table class="ui tablet stackable table">
+  
+  	<% items.forEach(function(item){ %>
+	  <tbody>
+	    <tr>
+	      <td>ID: <%=item.id%></td>
+	      <td><%=item.description%></td>
+	      <td class="right aligned">€<%=item.value%></td>
+	      <td><a href="/overview/<%=item._id%>">Detail</a></td>
+	    </tr>
+	  </tbody>
+	<%})%>
+</table>
+
+<a href="/new" class="ui big header"><i class="plus icon"></i>Create a New Transaction</a>
+<%include partials/footer%>

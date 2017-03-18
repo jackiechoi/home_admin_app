@@ -1,17 +1,16 @@
 <%include partials/header%>
 
-
 <div class="ui main text container segment">
-  <div class="ui big header">Create a New Transaction</div> 
-	<form action="/overview" method="POST">
+  <div class="ui big header">Edit Transaction for Id: <%=item.id%></div> 
+	<form action="/overview/<%=item._id%>?_method=PUT" method="POST">
 		<div class="ui right labeled input">
 		  <div class="ui label">€</div>
-		  <input type="text" name="item[value]" placeholder="Amount">
+		  <input type="text" name="item[value]" value="<%=item.value%>">
 		  <div class="ui basic label">.00</div>
 		</div>
 		<div class="ui form left icon input" id="description">
 		  <i class="tags icon"></i>
-		  <input type="text" name="item[description]" placeholder="Description">
+		  <input type="text" name="item[description]" value="<%=item.description%>">
 		</div>
 		<input type="submit" class="ui green button" id="add">
 	</form>

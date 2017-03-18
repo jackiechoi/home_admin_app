@@ -1,8 +1,12 @@
-var mongoose = require("mongoose");
+var mongoose = require("mongoose"),
+		randToken = require('rand-token');
 
 var itemSchema = new mongoose.Schema({
-	id: Number,
-	contractId:Number,
+	id: {
+		type: String, 
+		default: function() {return randToken.generate(6);}
+    },
+	contractId: {type: String, default: 9999 },
 	description: String,
 	value:Number,
 	//"time": included in date, 

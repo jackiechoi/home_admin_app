@@ -1,21 +1,5 @@
 <%include partials/header%>
 
-<div class="ui three item menu">
-  <a href="/index" class="item">Home</a>
-  <a href="/history" class="item">Payment History</a>
-  <a href="/contract" class="item">Contract</a>
-</div>
-
-<div class="ui main text container segment">
-	<div class="ui big header">
-		
-		<p></p>
-	  <p></p>
-	  <p></p>
-
-	</div>
-</div>
-
 
 <table class="ui striped table">
   <thead>
@@ -31,7 +15,7 @@
     <tr>
       <td><%=item.id%></td>
       <td><%=item.description%></td>
-      <td><%=item.value%></td>
+      <td>€<%=item.value%></td>
       <td><%=item.updatedAt%></td>
       <td><%=item.contractId%></td>
     </tr>
@@ -39,12 +23,14 @@
 <tfoot class="full-width">
     <tr>
       <th colspan="5">
-      	<div class="ui left floated small blue button">
+      	<a href="/overview/<%=item._id%>/edit" class="ui left floated small blue button">
           Edit
-        </div>
-        <div class="negative ui right floated small button">
-          Delete
-        </div>
+        </a>
+          <form action="/overview/<%=item._id%>?_method=DELETE" method="POST">
+           <button class="ui right floated red button">
+            Delete
+            </button>
+          </form>
       </th>
     </tr>
   </tfoot>
