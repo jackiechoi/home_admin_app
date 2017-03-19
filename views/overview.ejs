@@ -7,13 +7,13 @@
 	<a href="/overview/new" class="ui big header"><i class="plus icon"></i>Make a Transaction</a>
 	<table class="ui tablet stackable table">
 	  
-	  	<% items.forEach(function(item){ %>
+	  	<% items.forEach(function(eachItem){ %>
 		  <tbody>
 		    <tr>
-		      <td>ID: <%=item.id%></td>
-		      <td><%=item.description%></td>
-		      <td class="right aligned">€<%=item.value%></td>
-		      <td><a href="/overview/<%=item._id%>">Detail</a></td>
+		      <td>ID: <%=eachItem._id%></td>
+		      <td><%=eachItem.description%></td>
+		      <td class="right aligned">€<%=eachItem.value%></td>
+		      <td><a href="/overview/<%=eachItem._id%>">Detail</a></td>
 		    </tr>
 		  </tbody>
 		<%})%>

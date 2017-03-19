@@ -8,22 +8,19 @@ var itemSchema = new mongoose.Schema({
     },
 	contractId: {type: String, default: 9999 },
 	description: String,
-	value:Number,
+	value: Number,
 	//"time": included in date, 
 	isImported:false,
 	createdAt: Date,
 	updatedAt: {type: Date, default: Date.now},
-	isDeleted:false
-		/*add a user
-	user: {
-		id: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "User"
-		},
-		username: String
-	}*/
+	isDeleted:false,
+	author: {
+			id: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "User"
+			},
+			username: String
+	}
 })
 
 module.exports = mongoose.model("Item", itemSchema);
-
-

@@ -7,43 +7,21 @@ router.get("/", function(req, res){
 	res.redirect("index");
 });
 
-
-/*
-router.get("/overview/:id", isLoggedIn, function(req, res){
-	Item.findById(req.params.id).populate('items').exec(function(err, foundItem){
-		if(err){
-			console.log(err);
-			res.redirect("/err");
-		}else{
-			console.log(foundItem);
-			res.render("show", {item: foundItem});
-		}
-	})
-})
-*/
-//Overview
+// Overview
 router.get("/overview", isLoggedIn, function(req, res){
-		Item.find({}, function(err, items){
-		if(err){
-			console.log(err);
-			res.redirect("/err");
-		}else{
-			res.render("overview", {items:items})
-		}
-	})
+	User.findOne({username: req.user.username}).populate("items").exec(function(err, foundUser){
+			Item.find({}, function(err, items){
+				if(err){
+					console.log(err);
+					res.redirect("/err");
+				}else{
+					console.log("Found items: "+foundUser.items);
+					res.render("overview", {items: foundUser.items})
+				}
+			})	
+	});
 })
 
-// Overview (when a get request to /overview comes in, it will run isLoggedin function. If succeeded, run next which is Item.find)
-router.get("/overview", isLoggedIn, function(req, res){
-		Item.find({}, function(err, items){
-		if(err){
-			console.log(err);
-			res.redirect("/err");
-		}else{
-			res.render("overview", {items:items})
-		}
-	})
-})
 // Contract
 router.get("/contract", isLoggedIn, function(req, res){
 	res.render("contract")
@@ -53,33 +31,33 @@ router.get("/overview/new", isLoggedIn, function(req, res){
 	res.render("new");
 })
 
-//Associating ITEM with USER
-
-
 // CREATE ITEM ROUTE
 router.post("/overview", isLoggedIn, function(req, res){
-	Item.create(req.body.item, function(err, item){
-		User.findOne({username: req.user.username}, function(err, foundUser){
+	User.findOne({username: req.user.username}, function(err, foundUser){
 			if(err){
 			console.log(err);
 			res.redirect("/err");
 		}else{
-			/*console.log("user with the item: "+req.user.username)
-			item.user.id = req.user._id;
-			item.user.username = req.user.username;*/
-			foundUser.items.push(item);
-			foundUser.save(function(err, data){
+			Item.create(req.body.item, function(err, item){
 				if(err){
 					console.log(err);
 					res.redirect("/err");
 				}else{
+					//add username and id to item 
+					item.author.id = req.user._id;
+					item.author.username = req.user.username;
+					//save item
+					item.save();
+					foundUser.items.push(item);
+					foundUser.save();
+					console.log("created item: "+item)
 					res.redirect("/overview");
 				}
 			})
-			}
-		})
-	});
-});
+		}
+	})
+})
+
 // ERROR ROUTE
 router.get("/err", function(req, res){
 	res.render("err");
