@@ -2,6 +2,7 @@
 Rent payment tracking application for landlords
 
 Web link: https://payment-app-home.herokuapp.com
+//Check out the user stories and wireframe images!
 
 RESTful ROUTES
 
@@ -18,3 +19,4 @@ EDIT = {path: /overview/:id/edit, Http verb: GET, Purpose: Show edit form for on
 UPDATE = {path: /overview/:id, Http verb: PUT, Purpose: Update a particular item, then redirect to overview}
 
 DESTROY = {path: /overview/:id, Http verb: DELETE, Purpose: delete a particular item, then redirect to overview}
+
