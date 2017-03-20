@@ -1,8 +1,6 @@
 var mongoose = require("mongoose"),
 		randToken = require('rand-token');
 
-// add a property with key type
-
 var itemSchema = new mongoose.Schema({
 	id: {
 		type: String, 

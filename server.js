@@ -10,6 +10,7 @@ var express = require('express'),
 		Item = require("./models/item"),
 		User = require('./models/user');
 
+
 // REQUIRE ROUTES
 var authRoutes = require('./routes/auth'),
 		indexRoutes = require('./routes/index');
@@ -41,7 +42,7 @@ passport.use(new LocalStratey(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//creating my own middleware: we're passing currentUser: req.user to every single handler by calling this function for every route
+//creating my own middleware: passing currentUser: req.user to every single handler by calling this function for every route
 app.use(function(req, res, next){
 	res.locals.currentUser = req.user;
 	next();

@@ -16,8 +16,6 @@ var UserSchema = new mongoose.Schema({
 	]
 })
 
-
-
 //take the passportLocalMongoose package and add methods that come with the package to UserSchema
 UserSchema.plugin(passportLocalMongoose)
 

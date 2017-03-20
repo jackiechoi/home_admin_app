@@ -118,7 +118,7 @@ router.delete("/overview/:id", function(req, res){
 	})
 })
 
-//isLoggedIn: middleware function we defined
+//isLoggedIn: middleware function I defined
 function isLoggedIn (req, res, next){
 	if(req.isAuthenticated()){
 		return next();
