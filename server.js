@@ -15,7 +15,8 @@ var authRoutes = require('./routes/auth'),
 		indexRoutes = require('./routes/index');
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/home_v2");
+var connectionString = mongoose.connect("mongodb://jackie:1111@ds135830.mlab.com:35830/payment");
+//mongoose.connect("mongodb://localhost/home_v2");
 app.set('view engine', 'ejs')
 app.set('view cache', false);
 app.use(bodyParser.urlencoded({extended: true}))
