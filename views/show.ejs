@@ -1,41 +1,42 @@
 <%include partials/header%>
 
-<div class="ui big header">
-  <i class="search icon"></i>Detailed Transaction Info for ID: <%=item.id%>
+<div class="ui main text container segment">
+  <div class="ui big header">
+    <i class="search icon"></i>Detailed Transaction Info for ID: <%=item.id%>
+  </div>
+
+  <table class="ui striped table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Transaction Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%=item.id%></td>
+        <td><%=item.description%></td>
+        <td>€<%=item.value%></td>
+        <td><%=item.updatedAt%></td>
+      </tr>
+  </tbody>
+  <tfoot class="full-width">
+      <tr>
+        <th colspan="5">
+        	<a href="/overview/<%=item._id%>/edit" class="ui left floated small blue button">
+            Edit
+          </a>
+            <form action="/overview/<%=item._id%>?_method=DELETE" method="POST">
+             <button class="ui right floated red button">
+              Delete
+              </button>
+            </form>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
 </div>
 
-<table class="ui striped table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Description</th>
-      <th>Amount</th>
-      <th>Transaction Date</th>
-      <th>Contract Id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%=item.id%></td>
-      <td><%=item.description%></td>
-      <td>€<%=item.value%></td>
-      <td><%=item.updatedAt%></td>
-      <td><%=item.contractId%></td>
-    </tr>
-</tbody>
-<tfoot class="full-width">
-    <tr>
-      <th colspan="5">
-      	<a href="/overview/<%=item._id%>/edit" class="ui left floated small blue button">
-          Edit
-        </a>
-          <form action="/overview/<%=item._id%>?_method=DELETE" method="POST">
-           <button class="ui right floated red button">
-            Delete
-            </button>
-          </form>
-      </th>
-    </tr>
-  </tfoot>
-</table>
 <%include partials/footer%>

@@ -4,26 +4,6 @@ var express = require('express'),
 		passport = require('passport');	
 
 
-
-
-
-// Associating with item
-
-
-
-//Find User, 
-//find all items for that user
-/*
-User.findOne({username: "hulk"}).populate("items").exec(function(err, user){
-	if(err){
-		console.log(err);
-	}else{
-		console.log(user);
-	}
-});
-*/
-
-
 // SIGN-UP ROUTE
 router.get("/index", function(req, res){
 	res.render("index");
