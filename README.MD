@@ -1,5 +1,7 @@
 # home_payment
-Rent payment tracking application
+Rent payment tracking application for landlords
+
+Web link: https://payment-app-home.herokuapp.com
 
 RESTful ROUTES
 
