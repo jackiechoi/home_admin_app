@@ -1,6 +1,8 @@
 var mongoose = require("mongoose"),
 		randToken = require('rand-token');
 
+// add a property with key type
+
 var itemSchema = new mongoose.Schema({
 	id: {
 		type: String, 
@@ -20,7 +22,8 @@ var itemSchema = new mongoose.Schema({
 				ref: "User"
 			},
 			username: String
-	}
+	},
+	type: String
 })
 
 module.exports = mongoose.model("Item", itemSchema);

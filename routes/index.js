@@ -7,7 +7,7 @@ router.get("/", function(req, res){
 	res.redirect("index");
 });
 
-// Overview
+// OVERVIEW: Transaction + current balance
 router.get("/overview", isLoggedIn, function(req, res){
 	User.findOne({username: req.user.username}).populate("items").exec(function(err, foundUser){
 			Item.find({}, function(err, items){
@@ -15,8 +15,15 @@ router.get("/overview", isLoggedIn, function(req, res){
 					console.log(err);
 					res.redirect("/err");
 				}else{
-					console.log("Found items: "+foundUser.items);
-					res.render("overview", {items: foundUser.items})
+					var counter = 0;
+					var userItems = foundUser.items;
+					userItems.forEach(function(eachItem){
+						if(eachItem.type=='credit'){
+							eachItem.value=(eachItem.value)*(-1);
+						}
+						counter+=eachItem.value;
+					})
+					res.render("overview", {items: foundUser.items, balance: counter})
 				}
 			})	
 	});
@@ -38,6 +45,7 @@ router.post("/overview", isLoggedIn, function(req, res){
 			console.log(err);
 			res.redirect("/err");
 		}else{
+			console.log("------",req.body)
 			Item.create(req.body.item, function(err, item){
 				if(err){
 					console.log(err);
@@ -50,7 +58,7 @@ router.post("/overview", isLoggedIn, function(req, res){
 					item.save();
 					foundUser.items.push(item);
 					foundUser.save();
-					console.log("created item: "+item)
+					//console.log("created item: "+item)
 					res.redirect("/overview");
 				}
 			})

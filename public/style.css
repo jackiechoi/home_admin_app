@@ -33,4 +33,6 @@ footer {
 body {
 	background-color: rgba(128, 128, 128, 0.24);
 }
-
+#select {
+	margin: 10px 0px;
+}
