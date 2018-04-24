@@ -13,7 +13,7 @@ var express = require('express'),
 
 // REQUIRE ROUTES
 var authRoutes = require('./routes/auth'),
-		indexRoutes = require('./routes/index');
+	indexRoutes = require('./routes/index');
 
 // APP CONFIG
 var connectionString = mongoose.connect("mongodb://jackie:1111@ds135830.mlab.com:35830/payment");

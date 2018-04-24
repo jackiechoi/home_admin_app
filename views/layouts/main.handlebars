@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css">
+	<link rel="icon" type="image/png" href="http://www.journalonline.co.uk/favicon/favicon-196.png">
+
+	<title>Home Payment via Stripe</title>
+<head/>
+<body>
+	<div class="ui huge black inverted menu" id="nav">
+	  <a href="/index" class="item"><i class="home icon"></i>Home</a>
+	  <a href="/overview" class="item"><i class="line chart icon"></i>Payment Overview</a>
+	  <a href="/contract" class="item"><i class="world icon"></i>Contract</a>
+	  <div class="right menu">
+		  <% if(!currentUser){%>
+	    <a href="/index" class="item">Sign Up</a>
+	    <a href="/login" class="item">Login</a>
+	    <% }else{%>
+	   	<a href="/index" class="item">Signed In As <%=currentUser.username%></a>
+	    <a href="/logout" class="item">Logout</a>
+	    <%}%>
+	  </div>
+	</div>
+	<div class="container">
+	{{{body}}}
+<body/>
+</html>
