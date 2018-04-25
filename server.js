@@ -52,6 +52,7 @@ app.use(authRoutes);
 app.use(indexRoutes);
 app.use(stripeRoutes);
 
+//const port = process.env.PORT ;
 const port = process.env.PORT || '3001';
 
 app.listen(port, () => {
