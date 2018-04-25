@@ -13,8 +13,8 @@ const express = require('express'),
 
 // REQUIRE ROUTES
 const authRoutes = require('./routes/auth'),
-			indexRoutes = require('./routes/index'),
-			stripeRoutes = require('./routes/stripe');
+			indexRoutes = require('./routes/index');
+		//stripeRoutes = require('./routes/stripe');
 
 // APP CONFIG
 mongoose.connect(keys.dbURI);
@@ -50,12 +50,12 @@ app.use(function(req, res, next){
 })
 app.use(authRoutes);
 app.use(indexRoutes);
-app.use(stripeRoutes);
+//app.use(stripeRoutes);
 
 //const port = process.env.PORT ;
 const port = process.env.PORT || '3001';
 
 app.listen(port, () => {
-	console.log(`Home app started on port ${port}!`);
+	console.log('Home app is running on port ' + port);
 });
 
