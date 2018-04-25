@@ -8,8 +8,8 @@ const express = require('express'),
 			LocalStratey = require('passport-local'),
 			passportLocalMongoose = require('passport-local-mongoose'),
 			Item = require('./models/item'),
-			User = require('./models/user'),
-		  keys = require('./config/keys');
+			User = require('./models/user');
+		  //keys = require('./config/keys');
 
 // REQUIRE ROUTES
 const authRoutes = require('./routes/auth'),
@@ -17,7 +17,7 @@ const authRoutes = require('./routes/auth'),
 		//stripeRoutes = require('./routes/stripe');
 
 // APP CONFIG
-mongoose.connect(keys.dbURI);
+mongoose.connect('mongodb://jackie:1111@ds135830.mlab.com:35830/payment');
 
 app.set('view engine', 'ejs')
 app.set('view cache', false);
