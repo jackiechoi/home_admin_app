@@ -1,23 +1,24 @@
-var express = require('express'),
-		app = express(),
-		mongoose = require('mongoose'),
-		methodOverride = require('method-override')
-		cookieParser = require('cookie-parser'),
-		bodyParser = require('body-parser'),
-		passport = require('passport'),
-		LocalStratey = require('passport-local'),
-		passportLocalMongoose = require('passport-local-mongoose'),
-		Item = require("./models/item"),
-		User = require('./models/user');
-
+const express = require('express'),
+			app = express(),
+			mongoose = require('mongoose'),
+			methodOverride = require('method-override')
+			cookieParser = require('cookie-parser'),
+			bodyParser = require('body-parser'),
+			passport = require('passport'),
+			LocalStratey = require('passport-local'),
+			passportLocalMongoose = require('passport-local-mongoose'),
+			Item = require('./models/item'),
+			User = require('./models/user'),
+		  keys = require('./config/keys');
 
 // REQUIRE ROUTES
-var authRoutes = require('./routes/auth'),
-	indexRoutes = require('./routes/index');
+const authRoutes = require('./routes/auth'),
+			indexRoutes = require('./routes/index'),
+			stripeRoutes = require('./routes/stripe');
 
 // APP CONFIG
-var connectionString = mongoose.connect("mongodb://jackie:1111@ds135830.mlab.com:35830/payment");
-//mongoose.connect("mongodb://localhost/home_v2");
+mongoose.connect(keys.dbURI);
+
 app.set('view engine', 'ejs')
 app.set('view cache', false);
 app.use(bodyParser.urlencoded({extended: true}))
@@ -38,7 +39,7 @@ app.use(passport.session())
 //setting up middleware called authenticate
 passport.use(new LocalStratey(User.authenticate())); 
 
-//built-in authentication methods
+//built-in authentication methods from passportLocalMongoose
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -49,10 +50,11 @@ app.use(function(req, res, next){
 })
 app.use(authRoutes);
 app.use(indexRoutes);
+app.use(stripeRoutes);
 
+const port = process.env.PORT || '3001';
 
-app.listen(process.env.PORT || '3001'
-, function(){
-	console.log("payment app working!")
-})
+app.listen(port, () => {
+	console.log(`Home app started on port ${port}!`);
+});
 

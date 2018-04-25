@@ -1,7 +1,7 @@
-var express = require('express'),
-		router = express.Router(),
-		User = require('../models/user'),
-		passport = require('passport');	
+const express = require('express'),
+	  router = express.Router(),
+	  User = require('../models/user'),
+	  passport = require('passport');	
 
 
 // SIGN-UP ROUTE
