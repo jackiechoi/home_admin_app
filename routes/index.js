@@ -1,7 +1,7 @@
 var express = require('express'),
-		router = express.Router();
-		User = require('../models/user'),
-		Item = require('../models/item')		
+	router = express.Router();
+	User = require('../models/user'),
+	Item = require('../models/item')		
 
 router.get("/", function(req, res){
 	res.redirect("index");

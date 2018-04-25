@@ -6,10 +6,10 @@
     <label>Name</label>
     <div class="two fields">
       <div class="field">
-        <input type="text" value="John">
+        <input type="text" value=<%=currentUser.firstname%>>
       </div>
       <div class="field">
-        <input type="text" value="Doe">
+        <input type="text" value=<%=currentUser.lastname%>>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
     <label>Billing Address</label>
     <div class="fields">
       <div class="twelve wide field">
-        <input type="text" value="Rue de la loi 42">
+        <input type="text" value="Stresemann Str. 123">
       </div>
       <div class="four wide field">
         <input type="text" value="Unit 6">
@@ -29,7 +29,7 @@
       <div class="ui fluid search selection dropdown">
         <input type="hidden" name="country">
         <i class="dropdown icon"></i>
-	    		<div class="item" data-value="be"><i class="be flag"></i>Belgium</div>
+	    		<div class="item" data-value="be"><i class="de flag"></i>Germany</div>
     </div>
   </div>
   <h4 class="ui dividing header">Billing Information</h4>
